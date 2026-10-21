@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f1ee4092-4063-4247-8481-6b8fbd33060e}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>run.py</StartupFile>
+    <SearchPath>app</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>friendlyeats-fastapi</Name>
+    <RootNamespace>friendlyeats</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="run.py" />
+    <Compile Include="app\__init__.py" />
+    <Compile Include="app\main.py" />
+    <Compile Include="app\core\__init__.py" />
+    <Compile Include="app\core\config.py" />
+    <Compile Include="app\core\firebase.py" />
+    <Compile Include="app\domain\__init__.py" />
+    <Compile Include="app\domain\models.py" />
+    <Compile Include="app\domain\schemas.py" />
+    <Compile Include="app\repositories\__init__.py" />
+    <Compile Include="app\repositories\restaurant_repository.py" />
+    <Compile Include="app\services\__init__.py" />
+    <Compile Include="app\services\restaurant_service.py" />
+    <Compile Include="app\api\__init__.py" />
+    <Compile Include="app\api\v1\__init__.py" />
+    <Compile Include="app\api\v1\restaurants.py" />
+    <Compile Include="scripts\__init__.py" />
+    <Compile Include="scripts\seed.py" />
+    <Compile Include="tests\conftest.py" />
+    <Compile Include="tests\test_restaurants.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\core\" />
+    <Folder Include="app\domain\" />
+    <Folder Include="app\repositories\" />
+    <Folder Include="app\services\" />
+    <Folder Include="app\api\" />
+    <Folder Include="app\api\v1\" />
+    <Folder Include="app\templates\" />
+    <Folder Include="static\" />
+    <Folder Include="static\css\" />
+    <Folder Include="static\js\" />
+    <Folder Include="static\img\" />
+    <Folder Include="scripts\" />
+    <Folder Include="tests\" />
+    <Folder Include="secrets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\templates\base.html" />
+    <Content Include="app\templates\restaurants.html" />
+    <Content Include="app\templates\restaurant_detail.html" />
+    <Content Include="app\templates\restaurant_form.html" />
+    <Content Include="static\css\styles.css" />
+    <Content Include="static\js\app.js" />
+    <Content Include="static\img\placeholder.svg" />
+    <Content Include="requirements.txt" />
+    <Content Include="README.md" />
+    <Content Include=".env.example" />
+    <Content Include="firebase.json" />
+    <Content Include="firestore.rules" />
+    <Content Include="firestore.indexes.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

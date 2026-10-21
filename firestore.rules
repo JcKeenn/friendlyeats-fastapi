@@ -1,0 +1,13 @@
+rules_version = '2';
+
+// Sprint 1: la app aún no tiene autenticación (llega en el Sprint 2 con
+// Firebase Auth + ownerId + reglas por propietario). Por ahora la colección
+// `restaurants` es pública para lectura y escritura en el emulador.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /restaurants/{restaurantId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

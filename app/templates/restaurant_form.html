@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Editar' if restaurant else 'Nuevo' }} restaurante · FriendlyEats{% endblock %}
+
+{% block content %}
+<h1>{{ "Editar" if restaurant else "Nuevo" }} restaurante</h1>
+
+<form id="restaurant-form" data-restaurant-id="{{ restaurant.id if restaurant else '' }}">
+  <label for="name">Nombre</label>
+  <input id="name" name="name" required maxlength="100"
+         value="{{ restaurant.name if restaurant else '' }}">
+
+  <label for="category">Categoría</label>
+  <input id="category" name="category" required maxlength="50"
+         value="{{ restaurant.category if restaurant else '' }}">
+
+  <label for="city">Ciudad</label>
+  <input id="city" name="city" required maxlength="50"
+         value="{{ restaurant.city if restaurant else '' }}">
+
+  <label for="price">Precio</label>
+  <select id="price" name="price" required>
+    <option value="1" {% if restaurant and restaurant.price == 1 %}selected{% endif %}>$</option>
+    <option value="2" {% if restaurant and restaurant.price == 2 %}selected{% endif %}>$$</option>
+    <option value="3" {% if restaurant and restaurant.price == 3 %}selected{% endif %}>$$$</option>
+  </select>
+
+  <label for="photoUrl">URL de imagen (opcional)</label>
+  <input id="photoUrl" name="photoUrl"
+         value="{{ restaurant.photoUrl if restaurant and restaurant.photoUrl else '' }}">
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+  <a class="btn btn-ghost" href="{{ '/restaurants/' + restaurant.id if restaurant else '/' }}">Cancelar</a>
+</form>
+
+<p id="message" class="flash-error"></p>
+{% endblock %}

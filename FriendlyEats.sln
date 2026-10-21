@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.11.0.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888a0-9f3d-457c-b088-3a50505a93a2}") = "friendlyeats-fastapi", "friendlyeats-fastapi.pyproj", "{f1ee4092-4063-4247-8481-6b8fbd33060e}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{f1ee4092-4063-4247-8481-6b8fbd33060e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f1ee4092-4063-4247-8481-6b8fbd33060e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f1ee4092-4063-4247-8481-6b8fbd33060e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{f1ee4092-4063-4247-8481-6b8fbd33060e}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Restaurantes · FriendlyEats{% endblock %}
+
+{% block content %}
+<h1>Restaurantes</h1>
+
+{% if msg %}<p class="flash">{{ msg }}</p>{% endif %}
+
+<form class="filters" method="get" action="/">
+  <input type="text" name="city" placeholder="Ciudad" value="{{ filters.city or '' }}">
+  <input type="text" name="category" placeholder="Categoría" value="{{ filters.category or '' }}">
+  <select name="price">
+    <option value="">Precio: todos</option>
+    <option value="1" {% if filters.price == 1 %}selected{% endif %}>$</option>
+    <option value="2" {% if filters.price == 2 %}selected{% endif %}>$$</option>
+    <option value="3" {% if filters.price == 3 %}selected{% endif %}>$$$</option>
+  </select>
+  <select name="order_by">
+    <option value="name" {% if filters.order_by != 'avgRating' %}selected{% endif %}>Orden: nombre</option>
+    <option value="avgRating" {% if filters.order_by == 'avgRating' %}selected{% endif %}>Orden: mejor calificados</option>
+  </select>
+  <button type="submit" class="btn">Filtrar</button>
+  <a href="/" class="btn btn-ghost">Limpiar</a>
+</form>
+
+{% if restaurants %}
+<p class="count">{{ restaurants|length }} restaurante(s)</p>
+<section class="cards">
+  {% for r in restaurants %}
+  <article class="card">
+    <img src="{{ r.photoUrl or '/static/img/placeholder.svg' }}"
+         alt="Foto de {{ r.name }}" loading="lazy"
+         onerror="this.onerror=null;this.src='/static/img/placeholder.svg'">
+    <div class="card-body">
+      <h2>{{ r.name }}</h2>
+      <p class="meta">{{ r.category }} · {{ r.city }}</p>
+      <p class="meta">
+        <span class="price">{{ '$' * r.price }}</span> ·
+        <span class="stars">★ {{ '%.1f'|format(r.avgRating) }}</span> ({{ r.numRatings }})
+      </p>
+      <a class="btn" href="/restaurants/{{ r.id }}">Ver detalles</a>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<p class="empty">
+  Todavía no hay restaurantes.<br>
+  Crea uno con el botón <strong>“+ Nuevo restaurante”</strong> o carga los datos semilla:<br>
+  <code>python -m scripts.seed</code>
+</p>
+{% endif %}
+
+{% if next_url %}<a class="btn next-page" href="{{ next_url }}">Siguiente página →</a>{% endif %}
+{% endblock %}

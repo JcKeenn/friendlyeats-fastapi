@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Entornos y secretos (S1-05: ninguna credencial queda en Git)
+.env
+secrets/
+service-account.json
+*-firebase-adminsdk-*.json
+
+# Firebase: logs y exportaciones locales
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+firestore-emulator-tests.log
+firestore_export/
+
+# IDE
+.vs/
+.idea/

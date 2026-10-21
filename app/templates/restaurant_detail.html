@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ restaurant.name }} · FriendlyEats{% endblock %}
+
+{% block content %}
+<article class="detail">
+  <img src="{{ restaurant.photoUrl or '/static/img/placeholder.svg' }}"
+       alt="Foto de {{ restaurant.name }}"
+       onerror="this.onerror=null;this.src='/static/img/placeholder.svg'">
+  <div class="detail-body">
+    <h1>{{ restaurant.name }}</h1>
+    <p class="meta">{{ restaurant.category }} · {{ restaurant.city }}</p>
+    <p>
+      <span class="price">{{ '$' * restaurant.price }}</span> ·
+      <span class="stars">★ {{ '%.1f'|format(restaurant.avgRating) }}</span>
+      ({{ restaurant.numRatings }} reseñas)
+    </p>
+    <p class="meta small">ID: <code>{{ restaurant.id }}</code></p>
+    <div class="actions">
+      <a class="btn" href="/restaurants/{{ restaurant.id }}/edit">✏️ Editar</a>
+      <button class="btn btn-danger" data-action="delete" data-id="{{ restaurant.id }}">🗑️ Eliminar</button>
+      <a class="btn btn-ghost" href="/">← Volver</a>
+    </div>
+  </div>
+</article>
+{% endblock %}
