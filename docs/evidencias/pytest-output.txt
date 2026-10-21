@@ -1,0 +1,28 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Jc\Documents\Optativa_Produto 2\friendlyeats-fastapi\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Jc\Documents\Optativa_Produto 2\friendlyeats-fastapi
+plugins: anyio-4.15.1
+collecting ... collected 13 items
+
+tests/test_restaurants.py::test_health PASSED                            [  7%]
+tests/test_restaurants.py::test_create_restaurant PASSED                 [ 15%]
+tests/test_restaurants.py::test_invalid_price PASSED                     [ 23%]
+tests/test_restaurants.py::test_get_restaurant PASSED                    [ 30%]
+tests/test_restaurants.py::test_get_restaurant_not_found PASSED          [ 38%]
+tests/test_restaurants.py::test_update_restaurant PASSED                 [ 46%]
+tests/test_restaurants.py::test_update_not_found PASSED                  [ 53%]
+tests/test_restaurants.py::test_delete_restaurant PASSED                 [ 61%]
+tests/test_restaurants.py::test_delete_not_found PASSED                  [ 69%]
+tests/test_restaurants.py::test_list_restaurants PASSED                  [ 76%]
+tests/test_restaurants.py::test_filters PASSED                           [ 84%]
+tests/test_restaurants.py::test_invalid_order_by PASSED                  [ 92%]
+tests/test_restaurants.py::test_home_renders_html PASSED                 [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\Jc\Documents\Optativa_Produto 2\friendlyeats-fastapi\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 13 passed, 1 warning in 1.84s ========================

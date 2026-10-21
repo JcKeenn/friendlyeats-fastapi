@@ -1,0 +1,1 @@
+✅ 10 restaurantes de prueba creados en Firestore.

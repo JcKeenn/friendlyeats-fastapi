@@ -1,0 +1,273 @@
+{
+  "documents": [{
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/4Ztl4nR6KStHJFv6dEFv",
+    "fields": {
+      "city": {
+        "stringValue": "Monterrey"
+      },
+      "price": {
+        "integerValue": "3"
+      },
+      "category": {
+        "stringValue": "Asiática"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c"
+      },
+      "numRatings": {
+        "integerValue": "27"
+      },
+      "avgRating": {
+        "doubleValue": 4.7
+      },
+      "name": {
+        "stringValue": "Sushi Nara"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.849095Z",
+    "updateTime": "2026-10-21T19:33:15.849095Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/6rBfSaTeLPV7T609Qnra",
+    "fields": {
+      "city": {
+        "stringValue": "Monterrey"
+      },
+      "price": {
+        "integerValue": "1"
+      },
+      "category": {
+        "stringValue": "Hamburguesas"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+      },
+      "numRatings": {
+        "integerValue": "15"
+      },
+      "avgRating": {
+        "doubleValue": 3.9
+      },
+      "name": {
+        "stringValue": "Burger Nation"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.849100Z",
+    "updateTime": "2026-10-21T19:33:15.849100Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/Fv5fuJip84OrU1MUFApp",
+    "fields": {
+      "city": {
+        "stringValue": "Puebla"
+      },
+      "price": {
+        "integerValue": "2"
+      },
+      "category": {
+        "stringValue": "Desayunos"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1521017432531-fbd92d768814"
+      },
+      "numRatings": {
+        "integerValue": "14"
+      },
+      "avgRating": {
+        "doubleValue": 4.2
+      },
+      "name": {
+        "stringValue": "Café de Olla Bistro"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.866094Z",
+    "updateTime": "2026-10-21T19:33:15.866094Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/G4yuItCtEy4Mfn6Gj7Bg",
+    "fields": {
+      "city": {
+        "stringValue": "Puebla"
+      },
+      "price": {
+        "integerValue": "2"
+      },
+      "category": {
+        "stringValue": "Mexicana"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1552566626-52f8b828add9"
+      },
+      "numRatings": {
+        "integerValue": "20"
+      },
+      "avgRating": {
+        "doubleValue": 4.5
+      },
+      "name": {
+        "stringValue": "La Abuela"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.785747Z",
+    "updateTime": "2026-10-21T19:33:15.785747Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/LF0GCGnnEYSdONdQ6Sbf",
+    "fields": {
+      "city": {
+        "stringValue": "CDMX"
+      },
+      "price": {
+        "integerValue": "3"
+      },
+      "category": {
+        "stringValue": "Italiana"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+      },
+      "numRatings": {
+        "integerValue": "41"
+      },
+      "avgRating": {
+        "doubleValue": 4.6
+      },
+      "name": {
+        "stringValue": "Trattoria Bella"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.833295Z",
+    "updateTime": "2026-10-21T19:33:15.833295Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/QHMbftxf6eYg6dxd7YuV",
+    "fields": {
+      "city": {
+        "stringValue": "Guadalajara"
+      },
+      "price": {
+        "integerValue": "2"
+      },
+      "category": {
+        "stringValue": "Vegana"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd"
+      },
+      "numRatings": {
+        "integerValue": "9"
+      },
+      "avgRating": {
+        "doubleValue": 4.1
+      },
+      "name": {
+        "stringValue": "Verde Vegano"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.838132Z",
+    "updateTime": "2026-10-21T19:33:15.838132Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/cLnUk2l1EUnmQFcQxGCY",
+    "fields": {
+      "city": {
+        "stringValue": "Puebla"
+      },
+      "price": {
+        "integerValue": "1"
+      },
+      "category": {
+        "stringValue": "Pizza"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1513104890138-7c749659a591"
+      },
+      "numRatings": {
+        "integerValue": "12"
+      },
+      "avgRating": {
+        "doubleValue": 4.0
+      },
+      "name": {
+        "stringValue": "Pizza Central"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.801806Z",
+    "updateTime": "2026-10-21T19:33:15.801806Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/jvpviE7qGzX1nzbvxjit",
+    "fields": {
+      "city": {
+        "stringValue": "Veracruz"
+      },
+      "price": {
+        "integerValue": "2"
+      },
+      "category": {
+        "stringValue": "Mariscos"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1559339352-11d035aa65de"
+      },
+      "numRatings": {
+        "integerValue": "18"
+      },
+      "avgRating": {
+        "doubleValue": 4.3
+      },
+      "name": {
+        "stringValue": "Mariscos El Muelle"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.821215Z",
+    "updateTime": "2026-10-21T19:33:15.821215Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/oRPJcBFLKwUOaDkyw36Q",
+    "fields": {
+      "city": {
+        "stringValue": "Morelia"
+      },
+      "price": {
+        "integerValue": "2"
+      },
+      "category": {
+        "stringValue": "Mexicana"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+      },
+      "numRatings": {
+        "integerValue": "22"
+      },
+      "avgRating": {
+        "doubleValue": 4.4
+      },
+      "name": {
+        "stringValue": "Carnitas Don Lupito"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.849105Z",
+    "updateTime": "2026-10-21T19:33:15.849105Z"
+  }, {
+    "name": "projects/friendlyeats-dev/databases/(default)/documents/restaurants/uVeRG06jCXWI5CcCU2RV",
+    "fields": {
+      "city": {
+        "stringValue": "CDMX"
+      },
+      "price": {
+        "integerValue": "1"
+      },
+      "category": {
+        "stringValue": "Tacos"
+      },
+      "photoUrl": {
+        "stringValue": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47"
+      },
+      "numRatings": {
+        "integerValue": "35"
+      },
+      "avgRating": {
+        "doubleValue": 4.8
+      },
+      "name": {
+        "stringValue": "Tacos El Güero"
+      }
+    },
+    "createTime": "2026-10-21T19:33:15.801811Z",
+    "updateTime": "2026-10-21T19:33:15.801811Z"
+  }]
+}

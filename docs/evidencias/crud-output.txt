@@ -1,0 +1,19 @@
+== CRUD de restaurantes contra http://localhost:8000 ==
+
+POST   /api/v1/restaurants                 -> 201 (crear)
+       {"name":"Demo CRUD","category":"Mexicana","city":"Puebla","price":2,"photoUrl":null,"id":"eXtQ4aH5tt6ULqnuA8Hu","avgRating":0.0,"numRatings":0}
+
+GET    /api/v1/restaurants/eXtQ4aH5tt6ULqnuA8Hu  -> 200 (detalle)
+
+PATCH  /api/v1/restaurants/eXtQ4aH5tt6ULqnuA8Hu  -> 200 (editar)
+       {"name":"Demo CRUD","category":"Mexicana","city":"Oaxaca","price":3,"photoUrl":null,"id":"eXtQ4aH5tt6ULqnuA8Hu","avgRating":0.0,"numRatings":0}
+
+GET    /api/v1/restaurants?city=Puebla     -> 200 (filtro)
+       3 resultados: ['Café de Olla Bistro', 'La Abuela', 'Pizza Central']
+
+DELETE /api/v1/restaurants/eXtQ4aH5tt6ULqnuA8Hu  -> 204 (eliminar)
+GET    /api/v1/restaurants/eXtQ4aH5tt6ULqnuA8Hu  -> 404 (ya no existe)
+
+POST   price=10 (fuera de rango 1-3)       -> 422 (validación)
+
+== CRUD completo: OK ==
