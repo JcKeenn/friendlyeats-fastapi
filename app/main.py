@@ -30,13 +30,6 @@ async def health():
     return {"status": "ok"}
 
 
-@app.get("/algoritmos")
-async def algoritmos(request: Request):
-    """Investigación de algoritmos de búsqueda: definición, elementos,
-    ejemplo, clasificación e infografía."""
-    return templates.TemplateResponse(request, "algoritmos.html", {})
-
-
 def _filters_from_request(request: Request) -> dict:
     """Lee los filtros de la query string y normaliza tipos."""
     price_raw = request.query_params.get("price")

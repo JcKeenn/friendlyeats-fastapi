@@ -31,18 +31,6 @@ def test_health():
     assert response.json() == {"status": "ok"}
 
 
-def test_algoritmos_page():
-    """La página /algoritmos publica la investigación de búsqueda."""
-    response = client.get("/algoritmos")
-    assert response.status_code == 200
-    body = response.text
-    assert "Algoritmo de búsqueda" in body
-    assert "busqueda_binaria" in body
-    for familia in ("Exhaustiva", "Heurística", "Local", "Evolutiva"):
-        assert familia in body
-    assert "/static/infografia/clasificacion-algoritmos-busqueda.png" in body
-
-
 def test_create_restaurant():
     payload = _payload()
     response = client.post("/api/v1/restaurants", json=payload)

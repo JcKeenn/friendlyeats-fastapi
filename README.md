@@ -18,7 +18,7 @@ con vistas HTML.
 | Editar y eliminar restaurante | ✅ `/restaurants/{id}/edit` + botón Eliminar |
 | Filtrar por ciudad, categoría o precio | ✅ en la UI y en la API |
 | Ver datos persistidos en el emulador de Firestore | ✅ UI del emulador en http://127.0.0.1:4000 |
-| Pruebas básicas del CRUD | ✅ 15 pruebas, todas pasan |
+| Pruebas básicas del CRUD | ✅ 14 pruebas, todas pasan |
 
 ## 🧰 Requisitos previos
 
@@ -60,7 +60,7 @@ pytest -v
 
 `tests/conftest.py` detecta si el emulador está corriendo; si no, lo arranca
 solo y lo detiene al terminar (solo hace falta tener `firebase-tools`
-instalado). Resultado actual: **15 passed** — CRUD completo, validaciones,
+instalado). Resultado actual: **14 passed** — CRUD completo, validaciones,
 filtros, búsqueda y render HTML.
 
 ## 📁 Estructura del proyecto
@@ -81,14 +81,13 @@ friendlyeats-fastapi/
 │   │   └── restaurant_service.py      # Lógica de negocio
 │   ├── api/
 │   │   └── v1/restaurants.py     # Endpoints REST /api/v1/restaurants
-│   └── templates/               # Jinja2: base, listado, detalle, formulario, algoritmos
+│   └── templates/               # Jinja2: base, listado, detalle, formulario
 ├── static/
 │   ├── css/styles.css           # Interfaz responsive (escritorio y móvil)
 │   ├── js/app.js                # Envía formularios, muestra errores, elimina
-│   ├── img/placeholder.svg      # Imagen de respaldo cuando no hay foto
-│   └── infografia/              # Clasificación de algoritmos de búsqueda (HTML + PNG)
+│   └── img/placeholder.svg      # Imagen de respaldo cuando no hay foto
 ├── scripts/seed.py              # 20 restaurantes de prueba (idempotente)
-├── tests/                       # conftest (auto-emulador) + 15 pruebas
+├── tests/                       # conftest (auto-emulador) + 14 pruebas
 ├── .env.example                 # Variables de entorno (sin credenciales)
 ├── .firebaserc                  # Proyecto por defecto: friendlyeats-dev
 ├── firebase.json                 # Emuladores (8080) + UI (4000)
@@ -134,7 +133,6 @@ Vistas HTML (Jinja2)     Endpoints REST (FastAPI)
 | Ruta | Vista |
 |---|---|
 | `/` | Listado con tarjetas, panel de búsqueda, filtros y paginación |
-| `/algoritmos` | Investigación: algoritmos de búsqueda (definición, elementos, ejemplo, clasificación e infografía) |
 | `/restaurants/new` | Formulario crear |
 | `/restaurants/{id}` | Detalle con acciones Editar/Eliminar |
 | `/restaurants/{id}/edit` | Formulario editar (mismo template) |
@@ -177,7 +175,7 @@ Vistas HTML (Jinja2)     Endpoints REST (FastAPI)
 | Vistas HTML para listar, crear, ver, editar y eliminar | Navegar `/`, `/restaurants/new`, `/restaurants/{id}`, `/restaurants/{id}/edit` |
 | Filtros básicos por ciudad, categoría y precio | Panel de búsqueda de la portada (Buscar por nombre o ciudad + Categoría + Precio + Limpiar) o `GET /api/v1/restaurants?search=Puebla&price=2` |
 | Datos semilla cargados | `python -m scripts.seed` → aparecen 20 restaurantes |
-| Pruebas básicas del CRUD | `pytest -v` → 15 passed |
+| Pruebas básicas del CRUD | `pytest -v` → 14 passed |
 | README con instrucciones | Este archivo |
 
 Los documentos persistidos se ven en la **UI del emulador**:
