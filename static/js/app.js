@@ -60,3 +60,12 @@ document.querySelectorAll('[data-action="delete"]').forEach((button) => {
     }
   });
 });
+
+// Panel de búsqueda: los dropdowns aplican el filtro al cambiar;
+// "Buscar" se envía con Enter y "Limpiar" es un enlace a la raíz.
+const filterForm = document.querySelector("form.filters");
+if (filterForm) {
+  filterForm.addEventListener("change", (event) => {
+    if (event.target.matches("select")) filterForm.submit();
+  });
+}

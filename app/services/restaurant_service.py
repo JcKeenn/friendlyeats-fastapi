@@ -23,6 +23,7 @@ class RestaurantService:
         category: str | None = None,
         city: str | None = None,
         price: int | None = None,
+        search: str | None = None,
         order_by: str = "name",
         limit: int = 20,
         start_after: str | None = None,
@@ -36,10 +37,15 @@ class RestaurantService:
             category=category,
             city=city,
             price=price,
+            search=search,
             order_by=order_by,
             limit=limit,
             start_after=start_after,
         )
+
+    def distinct_categories(self) -> list[str]:
+        """Categorías distintas para el dropdown del panel de búsqueda."""
+        return self.repository.distinct_categories()
 
     def update(self, restaurant_id: str, payload: RestaurantUpdate) -> dict:
         data = payload.model_dump(exclude_unset=True)

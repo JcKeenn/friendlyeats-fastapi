@@ -13,15 +13,17 @@ async def list_restaurants(
     category: str | None = None,
     city: str | None = None,
     price: int | None = Query(default=None, ge=1, le=3),
+    search: str | None = Query(default=None, max_length=100),
     order_by: str = "name",
     limit: int = Query(default=20, ge=1, le=100),
     start_after: str | None = None,
 ):
-    """Lista de restaurantes con filtros, orden y paginación por cursor."""
+    """Lista de restaurantes con búsqueda, filtros, orden y paginación."""
     return service.list(
         category=category,
         city=city,
         price=price,
+        search=search,
         order_by=order_by,
         limit=limit,
         start_after=start_after,
