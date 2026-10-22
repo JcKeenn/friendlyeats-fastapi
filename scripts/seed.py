@@ -1,8 +1,10 @@
-"""Datos semilla: 10 restaurantes de prueba en la colección `restaurants`.
+"""Datos semilla: 20 restaurantes de prueba en la colección `restaurants`.
 
 Ejecutar con el emulador de Firestore activo:
 
     python -m scripts.seed
+
+No duplica: si un restaurante con el mismo nombre ya existe, se omite.
 """
 from app.core.firebase import db
 
@@ -97,15 +99,116 @@ restaurants = [
         "avgRating": 4.2,
         "numRatings": 14,
     },
+    {
+        "name": "Asador La Brasa",
+        "category": "Parrilla",
+        "city": "CDMX",
+        "price": 3,
+        "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947",
+        "avgRating": 4.5,
+        "numRatings": 33,
+    },
+    {
+        "name": "Ramen Ichiban",
+        "category": "Asiática",
+        "city": "CDMX",
+        "price": 2,
+        "photoUrl": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624",
+        "avgRating": 4.4,
+        "numRatings": 29,
+    },
+    {
+        "name": "Salmón & Co",
+        "category": "Mediterránea",
+        "city": "Monterrey",
+        "price": 3,
+        "photoUrl": "https://images.unsplash.com/photo-1467003909585-2f8a72700288",
+        "avgRating": 4.6,
+        "numRatings": 24,
+    },
+    {
+        "name": "Green Bowl",
+        "category": "Vegana",
+        "city": "Guadalajara",
+        "price": 2,
+        "photoUrl": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe",
+        "avgRating": 4.2,
+        "numRatings": 17,
+    },
+    {
+        "name": "Desayunos La Parroquia",
+        "category": "Desayunos",
+        "city": "CDMX",
+        "price": 1,
+        "photoUrl": "https://images.unsplash.com/photo-1484723091739-30a097e8f929",
+        "avgRating": 4.1,
+        "numRatings": 26,
+    },
+    {
+        "name": "Fuego y Vino",
+        "category": "Española",
+        "city": "Querétaro",
+        "price": 3,
+        "photoUrl": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+        "avgRating": 4.7,
+        "numRatings": 38,
+    },
+    {
+        "name": "Napoletana 60",
+        "category": "Pizza",
+        "city": "Guadalajara",
+        "price": 2,
+        "photoUrl": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+        "avgRating": 4.3,
+        "numRatings": 21,
+    },
+    {
+        "name": "Wok Chan",
+        "category": "Asiática",
+        "city": "Puebla",
+        "price": 1,
+        "photoUrl": "https://images.unsplash.com/photo-1585032226651-759b368d7246",
+        "avgRating": 3.8,
+        "numRatings": 13,
+    },
+    {
+        "name": "Maison Bleu",
+        "category": "Francesa",
+        "city": "CDMX",
+        "price": 3,
+        "photoUrl": "https://images.unsplash.com/photo-1551218808-94e220e084d2",
+        "avgRating": 4.8,
+        "numRatings": 52,
+    },
+    {
+        "name": "Dulce Final",
+        "category": "Postres",
+        "city": "Morelia",
+        "price": 1,
+        "photoUrl": "https://images.unsplash.com/photo-1565958011703-44f9829ba187",
+        "avgRating": 4.0,
+        "numRatings": 19,
+    },
 ]
 
 
 def seed() -> int:
-    """Inserta los restaurantes con ID automático (add)."""
+    """Inserta los restaurantes con ID automático (add), sin duplicar por nombre."""
+    existing = {
+        (doc.to_dict() or {}).get("name")
+        for doc in db.collection("restaurants").stream()
+    }
+    added = 0
     for restaurant in restaurants:
+        if restaurant["name"] in existing:
+            continue
         db.collection("restaurants").add(restaurant)
-    print(f"✅ {len(restaurants)} restaurantes de prueba creados en Firestore.")
-    return len(restaurants)
+        added += 1
+    if added:
+        print(f"✅ {added} restaurantes de prueba creados en Firestore.")
+    else:
+        print("ℹ️  Nada nuevo: los restaurantes semilla ya existen.")
+    return added
 
 
 if __name__ == "__main__":

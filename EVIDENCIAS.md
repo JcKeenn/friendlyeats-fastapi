@@ -20,7 +20,7 @@ verificarlo en vivo. Las capturas están en `docs/evidencias/`.
 | 11 | Vistas HTML (S1-17..S1-20) | `01-listado.png`, `02-detalle.png`, `03-formulario-nuevo.png`, `04-formulario-editar.png` | http://localhost:8000 |
 | 12 | CSS responsive (S1-21) | `static/css/styles.css` + media query móvil | abrir en móvil / DevTools |
 | 13 | JS del formulario (S1-22) | `static/js/app.js` (crea/edita/elimina + errores) | crear/editar/eliminar desde la UI |
-| 14 | Datos semilla (S1-23) | `docs/evidencias/seed-output.txt` (10 restaurantes) + `06-emulador-firestore.png` | `python -m scripts.seed` |
+| 14 | Datos semilla (S1-23) | `docs/evidencias/seed-output.txt` (20 restaurantes, idempotente) + `06-emulador-firestore.png` | `python -m scripts.seed` |
 | 15 | Pruebas del CRUD (S1-24) | `docs/evidencias/pytest-output.txt` → **15 passed** | `pytest -v` |
 | 16 | README (S1-25) | `README.md` (comandos, arquitectura, decisiones) | — |
 | 17 | Persistencia en el emulador | `06-emulador-firestore.png` (colección `restaurants` con documentos) + `firestore-rest-documentos.txt` | http://127.0.0.1:4000/firestore/default/data/restaurants |
@@ -42,7 +42,7 @@ verificarlo en vivo. Las capturas están en `docs/evidencias/`.
 firebase emulators:start --only firestore   # terminal 1
 uvicorn app.main:app --reload              # terminal 2
 
-python -m scripts.seed                 # datos semilla (10 restaurantes)
+python -m scripts.seed                 # datos semilla (20 restaurantes)
 python -m scripts.demo_crud            # demostración del CRUD por HTTP
 pytest -v                              # 15 pruebas
 ```

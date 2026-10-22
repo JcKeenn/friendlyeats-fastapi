@@ -38,7 +38,7 @@ pip install -r requirements.txt
 # 2) Emulador de Firestore (terminal 1)
 firebase emulators:start --only firestore
 
-# 3) Datos semilla (terminal 2, la primera vez) — crea 10 restaurantes
+# 3) Datos semilla (terminal 2, la primera vez) — crea 20 restaurantes
 python -m scripts.seed
 
 # 4) Aplicación (terminal 2)
@@ -87,7 +87,7 @@ friendlyeats-fastapi/
 │   ├── js/app.js                # Envía formularios, muestra errores, elimina
 │   ├── img/placeholder.svg      # Imagen de respaldo cuando no hay foto
 │   └── infografia/              # Clasificación de algoritmos de búsqueda (HTML + PNG)
-├── scripts/seed.py              # 10 restaurantes de prueba
+├── scripts/seed.py              # 20 restaurantes de prueba (idempotente)
 ├── tests/                       # conftest (auto-emulador) + 15 pruebas
 ├── .env.example                 # Variables de entorno (sin credenciales)
 ├── .firebaserc                  # Proyecto por defecto: friendlyeats-dev
@@ -176,7 +176,7 @@ Vistas HTML (Jinja2)     Endpoints REST (FastAPI)
 | CRUD completo de restaurantes | Crear en `/restaurants/new`, ver detalle, editar y eliminar desde la UI (o probar en http://localhost:8000/docs) |
 | Vistas HTML para listar, crear, ver, editar y eliminar | Navegar `/`, `/restaurants/new`, `/restaurants/{id}`, `/restaurants/{id}/edit` |
 | Filtros básicos por ciudad, categoría y precio | Panel de búsqueda de la portada (Buscar por nombre o ciudad + Categoría + Precio + Limpiar) o `GET /api/v1/restaurants?search=Puebla&price=2` |
-| Datos semilla cargados | `python -m scripts.seed` → aparecen 10 restaurantes |
+| Datos semilla cargados | `python -m scripts.seed` → aparecen 20 restaurantes |
 | Pruebas básicas del CRUD | `pytest -v` → 15 passed |
 | README con instrucciones | Este archivo |
 

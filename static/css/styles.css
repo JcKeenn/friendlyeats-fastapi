@@ -1,17 +1,17 @@
-/* FriendlyEats — Sprint 1: tema oscuro "vino" con panel de búsqueda.
-   Paleta tomada del diseño de referencia:
-   fondo #331A26 · panel #6B2A4A · campos #4A1F33 · bordes #8C4B6B · texto #F0F0F0 */
+/* FriendlyEats — Sprint 1: tema oscuro negro/gris con acentos azules.
+   Paleta: fondo #0E1013 · panel #1A1F26 · campos #12151B · bordes #323B4A · texto #ECEEF2 · azul #3B82F6 */
 
 :root {
-  --bg: #331a26;
-  --panel: #6b2a4a;
-  --field: #4a1f33;
-  --card: #3f1c2c;
-  --border: #8c4b6b;
-  --text: #f0f0f0;
-  --muted: #c9a3b5;
-  --accent: #e0526e;
-  --accent-dark: #c8435d;
+  --bg: #0e1013;
+  --panel: #1a1f26;
+  --field: #12151b;
+  --card: #16191f;
+  --border: #323b4a;
+  --text: #eceef2;
+  --muted: #98a0ad;
+  --accent: #3b82f6;
+  --accent-dark: #2d6fe0;
+  --danger: #ef5350;
   --radius: 10px;
 }
 
@@ -32,7 +32,7 @@ a { color: var(--accent); }
   justify-content: space-between;
   gap: 12px;
   padding: 12px 20px;
-  background: rgba(26, 11, 19, 0.6);
+  background: rgba(10, 12, 16, 0.72);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -123,7 +123,7 @@ input, select {
 input:focus, select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(224, 82, 110, 0.25);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
 }
 input::placeholder { color: rgba(240, 240, 240, 0.45); }
 
@@ -152,11 +152,11 @@ select option { background: var(--field); color: var(--text); }
   transition: background 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
-.btn:hover { background: #5a2940; }
+.btn:hover { background: #262c36; }
 .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-.btn-danger { background: transparent; border-color: var(--accent); color: var(--accent); }
-.btn-danger:hover { background: var(--accent); color: #fff; }
+.btn-danger { background: transparent; border-color: var(--danger); color: var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
 .btn-ghost { border-color: transparent; color: var(--muted); }
 
 /* ---------- Tarjetas del listado ---------- */
@@ -184,7 +184,7 @@ select option { background: var(--field); color: var(--text); }
   height: 160px;
   object-fit: cover;
   display: block;
-  background: #2a1520;
+  background: #0a0c0f;
 }
 .card-body {
   padding: 14px;
@@ -197,8 +197,8 @@ select option { background: var(--field); color: var(--text); }
 .card-body .btn { margin-top: auto; align-self: flex-start; }
 
 .meta { margin: 0; color: var(--muted); font-size: 0.9rem; }
-.price { color: #8fe3a8; font-weight: 700; }
-.stars { color: #f2b53c; font-weight: 700; }
+.price { color: #8fd0ff; font-weight: 700; }
+.stars { color: #7aa5f5; font-weight: 700; }
 
 /* ---------- Detalle ---------- */
 .detail {
@@ -215,7 +215,7 @@ select option { background: var(--field); color: var(--text); }
   height: 100%;
   min-height: 300px;
   object-fit: cover;
-  background: #2a1520;
+  background: #0a0c0f;
 }
 .detail-body { padding: 28px; }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
@@ -235,12 +235,12 @@ select option { background: var(--field); color: var(--text); }
 /* ---------- Mensajes ---------- */
 .flash {
   padding: 12px 16px;
-  background: #1f3d2b;
-  border: 1px solid #2f6b45;
-  color: #a8e6c1;
+  background: #16222e;
+  border: 1px solid #2c4a6e;
+  color: #a5c8ea;
   border-radius: var(--radius);
 }
-.flash-error { color: #ff8f8f; font-weight: 600; min-height: 1.4em; }
+.flash-error { color: #ff9d9d; font-weight: 600; min-height: 1.4em; }
 .empty {
   color: var(--muted);
   background: var(--card);
@@ -306,7 +306,7 @@ select option { background: var(--field); color: var(--text); }
 .algo-table td:first-child { font-weight: 700; white-space: nowrap; }
 
 .algo-code {
-  background: #1d0e17;
+  background: #0e1218;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px 18px;
@@ -316,7 +316,7 @@ select option { background: var(--field); color: var(--text); }
 }
 .algo-code code {
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-  color: #f2d9e2;
+  color: #d7e3f5;
   white-space: pre;
 }
 
