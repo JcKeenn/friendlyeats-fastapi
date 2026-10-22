@@ -1,14 +1,18 @@
-/* FriendlyEats Sprint 1 — estilos: usables en escritorio y móvil (S1-21). */
+/* FriendlyEats — Sprint 1: tema oscuro "vino" con panel de búsqueda.
+   Paleta tomada del diseño de referencia:
+   fondo #331A26 · panel #6B2A4A · campos #4A1F33 · bordes #8C4B6B · texto #F0F0F0 */
 
 :root {
-  --brand: #d64545;
-  --brand-dark: #b73535;
-  --bg: #f7f5f2;
-  --card: #ffffff;
-  --text: #22201d;
-  --muted: #6f6a63;
-  --border: #e5e0d8;
-  --radius: 12px;
+  --bg: #331a26;
+  --panel: #6b2a4a;
+  --field: #4a1f33;
+  --card: #3f1c2c;
+  --border: #8c4b6b;
+  --text: #f0f0f0;
+  --muted: #c9a3b5;
+  --accent: #e0526e;
+  --accent-dark: #c8435d;
+  --radius: 10px;
 }
 
 * { box-sizing: border-box; }
@@ -20,17 +24,20 @@ body {
   color: var(--text);
 }
 
+a { color: var(--accent); }
+
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 12px 20px;
-  background: var(--card);
+  background: rgba(26, 11, 19, 0.6);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 10;
+  backdrop-filter: blur(6px);
 }
 
 .brand {
@@ -52,48 +59,107 @@ body {
   font-size: 0.85rem;
   padding: 20px;
 }
+.footer a { color: var(--muted); }
 
 h1 { margin: 0 0 16px; }
 .count { color: var(--muted); margin-top: 0; }
 
-/* Filtros */
+/* ---------- Panel de búsqueda y filtros (diseño de referencia) ---------- */
 .filters {
   display: flex;
+  align-items: flex-end;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 14px;
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 0 0 22px;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 150px;
+  min-width: 0;
+}
+.field-search { flex: 2 1 240px; }
+
+.field label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+/* Botón "Limpiar": pastilla con borde, fondo transparente */
+.btn-clear {
+  align-self: flex-end;
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 8px 24px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-clear:hover { background: var(--field); border-color: var(--text); }
+
+/* ---------- Campos (generales: también formularios crear/editar) ---------- */
 input, select {
   padding: 10px 12px;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 6px;
   font-size: 0.95rem;
-  background: var(--card);
-  min-width: 140px;
+  font-family: inherit;
+  background: var(--field);
+  color: var(--text);
+  min-width: 0;
 }
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(224, 82, 110, 0.25);
+}
+input::placeholder { color: rgba(240, 240, 240, 0.45); }
 
-/* Botones */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 34px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23f0f0f0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+select option { background: var(--field); color: var(--text); }
+
+/* ---------- Botones ---------- */
 .btn {
   display: inline-block;
   padding: 10px 16px;
-  border-radius: var(--radius);
+  border-radius: 8px;
   border: 1px solid var(--border);
-  background: var(--card);
+  background: var(--field);
   color: var(--text);
   font-size: 0.95rem;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
 }
-.btn:hover { background: #f0ece6; }
-.btn-primary { background: var(--brand); border-color: var(--brand); color: #fff; }
-.btn-primary:hover { background: var(--brand-dark); }
-.btn-danger { background: var(--card); border-color: var(--brand); color: var(--brand); }
-.btn-danger:hover { background: var(--brand); color: #fff; }
+.btn:hover { background: #5a2940; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-danger { background: transparent; border-color: var(--accent); color: var(--accent); }
+.btn-danger:hover { background: var(--accent); color: #fff; }
 .btn-ghost { border-color: transparent; color: var(--muted); }
 
-/* Tarjetas del listado */
+/* ---------- Tarjetas del listado ---------- */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -111,14 +177,14 @@ input, select {
 }
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 .card img {
   width: 100%;
   height: 160px;
   object-fit: cover;
   display: block;
-  background: var(--border);
+  background: #2a1520;
 }
 .card-body {
   padding: 14px;
@@ -131,10 +197,10 @@ input, select {
 .card-body .btn { margin-top: auto; align-self: flex-start; }
 
 .meta { margin: 0; color: var(--muted); font-size: 0.9rem; }
-.price { color: #2a9d5c; font-weight: 700; }
-.stars { color: #e8a613; font-weight: 700; }
+.price { color: #8fe3a8; font-weight: 700; }
+.stars { color: #f2b53c; font-weight: 700; }
 
-/* Detalle */
+/* ---------- Detalle ---------- */
 .detail {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -149,32 +215,32 @@ input, select {
   height: 100%;
   min-height: 300px;
   object-fit: cover;
-  background: var(--border);
+  background: #2a1520;
 }
 .detail-body { padding: 28px; }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
 .small { font-size: 0.8rem; }
 
-/* Formulario */
-form {
+/* ---------- Formulario (crear/editar) ---------- */
+#restaurant-form {
   display: flex;
   flex-direction: column;
   gap: 8px;
   max-width: 480px;
   margin-top: 8px;
 }
-form label { font-weight: 600; margin-top: 8px; }
-form button[type="submit"] { margin-top: 16px; align-self: flex-start; }
+#restaurant-form label { font-weight: 600; margin-top: 8px; color: var(--text); }
+#restaurant-form button[type="submit"] { margin-top: 16px; align-self: flex-start; }
 
-/* Mensajes */
+/* ---------- Mensajes ---------- */
 .flash {
   padding: 12px 16px;
-  background: #e7f6ec;
-  border: 1px solid #b7e4c7;
-  color: #1c6b3c;
+  background: #1f3d2b;
+  border: 1px solid #2f6b45;
+  color: #a8e6c1;
   border-radius: var(--radius);
 }
-.flash-error { color: #b3261e; font-weight: 600; min-height: 1.4em; }
+.flash-error { color: #ff8f8f; font-weight: 600; min-height: 1.4em; }
 .empty {
   color: var(--muted);
   background: var(--card);
@@ -183,12 +249,120 @@ form button[type="submit"] { margin-top: 16px; align-self: flex-start; }
   border-radius: var(--radius);
   line-height: 1.8;
 }
+.empty code { color: var(--text); }
 .next-page { margin-top: 20px; }
 
-/* Móvil */
+/* ---------- Móvil ---------- */
 @media (max-width: 720px) {
   .detail { grid-template-columns: 1fr; }
   .detail img { min-height: 220px; max-height: 280px; }
-  .filters input, .filters select { flex: 1 1 100%; min-width: 0; }
+  .filters .field, .filters .field-search { flex: 1 1 100%; }
+  .btn-clear { flex: 1 1 100%; text-align: center; }
   .topbar { flex-wrap: wrap; }
 }
+
+/* ---------- Página /algoritmos (investigación de búsqueda) ---------- */
+.topbar nav { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+.algo-block { margin: 30px 0 8px; }
+.algo-block h2 { font-size: 1.25rem; margin-bottom: 12px; color: var(--text); }
+.algo-block h3.algo-sub { margin: 22px 0 10px; font-size: 1.05rem; }
+
+.algo-def, .algo-note {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  line-height: 1.65;
+  color: var(--text);
+}
+.algo-def p + p { margin-top: 10px; }
+.algo-note { font-size: 0.92rem; color: var(--muted); }
+.algo-def strong { color: var(--text); }
+.algo-def code, .algo-note code, .algo-table code {
+  background: var(--field);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--text);
+}
+
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  background: var(--card);
+}
+.algo-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.algo-table th, .algo-table td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+.algo-table thead th { background: var(--panel); color: var(--text); font-size: 0.85rem; }
+.algo-table tbody tr:last-child td { border-bottom: none; }
+.algo-table td:first-child { font-weight: 700; white-space: nowrap; }
+
+.algo-code {
+  background: #1d0e17;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.algo-code code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  color: #f2d9e2;
+  white-space: pre;
+}
+
+.algo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.algo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  line-height: 1.55;
+}
+.algo-card h3 { margin: 0 0 2px; font-size: 1.05rem; }
+.algo-card .algo-aka { margin: 0 0 10px; font-size: 0.78rem; color: var(--muted); font-style: italic; }
+.algo-card p { margin: 0 0 10px; font-size: 0.9rem; }
+.algo-card .algo-ex {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.algo-card.exh { border-top: 3px solid #4f83ec; }
+.algo-card.heu { border-top: 3px solid #e8a13c; }
+.algo-card.loc { border-top: 3px solid #34c28d; }
+.algo-card.evo { border-top: 3px solid #a678f0; }
+.algo-card.exh h3 { color: #7aa5f5; }
+.algo-card.heu h3 { color: #f0b45f; }
+.algo-card.loc h3 { color: #57d6a4; }
+.algo-card.evo h3 { color: #c29af7; }
+
+.algo-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+.algo-chips li {
+  background: var(--field);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.algo-chips strong { color: var(--text); font-weight: 700; }
+
+.algo-infografia {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #f6f2ea;
+}
+.algo-sources { margin-top: 26px; font-size: 0.78rem; color: var(--muted); line-height: 1.6; }

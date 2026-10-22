@@ -31,6 +31,18 @@ def test_health():
     assert response.json() == {"status": "ok"}
 
 
+def test_algoritmos_page():
+    """La página /algoritmos publica la investigación de búsqueda."""
+    response = client.get("/algoritmos")
+    assert response.status_code == 200
+    body = response.text
+    assert "Algoritmo de búsqueda" in body
+    assert "busqueda_binaria" in body
+    for familia in ("Exhaustiva", "Heurística", "Local", "Evolutiva"):
+        assert familia in body
+    assert "/static/infografia/clasificacion-algoritmos-busqueda.png" in body
+
+
 def test_create_restaurant():
     payload = _payload()
     response = client.post("/api/v1/restaurants", json=payload)
@@ -121,6 +133,35 @@ def test_filters():
     results = response.json()
     assert len(results) == 1
     assert results[0]["id"] == created["id"]
+    client.delete(f"/api/v1/restaurants/{created['id']}")
+
+
+def test_search():
+    """`search` encuentra por prefijo de nombre o por ciudad exacta."""
+    suffix = uuid.uuid4().hex[:8]
+    created = client.post(
+        "/api/v1/restaurants",
+        json=_payload(name=f"Zorzal {suffix}", city=f"SearchCity {suffix}"),
+    ).json()
+
+    by_name = client.get(
+        "/api/v1/restaurants", params={"search": f"Zorzal {suffix}", "limit": 100}
+    )
+    assert by_name.status_code == 200
+    assert created["id"] in [r["id"] for r in by_name.json()]
+
+    by_city = client.get(
+        "/api/v1/restaurants", params={"search": f"SearchCity {suffix}"}
+    )
+    assert by_city.status_code == 200
+    assert created["id"] in [r["id"] for r in by_city.json()]
+
+    by_nothing = client.get(
+        "/api/v1/restaurants", params={"search": f"Nada{suffix}"}
+    )
+    assert by_nothing.status_code == 200
+    assert by_nothing.json() == []
+
     client.delete(f"/api/v1/restaurants/{created['id']}")
 
 

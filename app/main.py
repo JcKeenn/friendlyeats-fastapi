@@ -30,10 +30,18 @@ async def health():
     return {"status": "ok"}
 
 
+@app.get("/algoritmos")
+async def algoritmos(request: Request):
+    """Investigación de algoritmos de búsqueda: definición, elementos,
+    ejemplo, clasificación e infografía."""
+    return templates.TemplateResponse(request, "algoritmos.html", {})
+
+
 def _filters_from_request(request: Request) -> dict:
     """Lee los filtros de la query string y normaliza tipos."""
     price_raw = request.query_params.get("price")
     return {
+        "search": (request.query_params.get("search") or "").strip() or None,
         "category": request.query_params.get("category") or None,
         "city": request.query_params.get("city") or None,
         "price": int(price_raw) if price_raw in ("1", "2", "3") else None,
@@ -60,6 +68,7 @@ async def home(request: Request):
         {
             "restaurants": restaurants,
             "filters": filters,
+            "categories": service.distinct_categories(),
             "next_url": next_url,
             "msg": request.query_params.get("msg"),
         },

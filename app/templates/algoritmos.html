@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}Algoritmos de búsqueda · FriendlyEats{% endblock %}
+
+{% block content %}
+<h1>Algoritmos de búsqueda</h1>
+<p class="count">Qué son, sus elementos, un ejemplo y su clasificación — aplicados al panel de búsqueda de esta app.</p>
+
+<!-- (a) Definición -->
+<section class="algo-block">
+  <h2>1 · ¿Qué es un algoritmo de búsqueda?</h2>
+  <div class="algo-def">
+    <p>Un <strong>algoritmo de búsqueda</strong> es un procedimiento paso a paso que recorre un
+    <em>espacio de búsqueda</em> —una colección de datos, un árbol, un grafo o un espacio de
+    estados— comparando cada elemento visitado con el <em>objetivo</em>, hasta encontrarlo o
+    agotar el espacio.</p>
+    <p>Es la operación detrás de tareas cotidianas: buscar un contacto en el teléfono, una
+    palabra en el diccionario o un restaurante por su nombre — exactamente lo que hace el
+    panel <strong>“Buscar”</strong> de la portada.</p>
+  </div>
+</section>
+
+<!-- (b) Elementos -->
+<section class="algo-block">
+  <h2>2 · Elementos que intervienen</h2>
+  <div class="table-wrap">
+    <table class="algo-table">
+      <thead>
+        <tr><th>Elemento</th><th>Descripción</th><th>En el panel de búsqueda de esta app</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Espacio de búsqueda</td>
+          <td>Estructura donde se busca: vector, lista, árbol, grafo o colección de una base de datos.</td>
+          <td>Colección <code>restaurants</code> de Firestore (emulador).</td>
+        </tr>
+        <tr>
+          <td>Objetivo / clave</td>
+          <td>El dato que se quiere localizar (la “clave de búsqueda”).</td>
+          <td>Texto escrito en el campo <em>Buscar</em> (parámetro <code>search</code>).</td>
+        </tr>
+        <tr>
+          <td>Índice / puntero</td>
+          <td>Posición que se está examinando en cada paso.</td>
+          <td>Cursor de paginación <code>start_after</code> (documento siguiente).</td>
+        </tr>
+        <tr>
+          <td>Función de comparación</td>
+          <td>Criterio de coincidencia: igualdad (<code>==</code>), orden (<code><</code>), prefijo, similitud…</td>
+          <td><code>city == texto</code> OR <code>name</code> en rango de prefijo.</td>
+        </tr>
+        <tr>
+          <td>Controles del espacio</td>
+          <td>Variables que delimitan la parte activa del espacio (p. ej. <code>inf</code>, <code>sup</code>, <code>centro</code>).</td>
+          <td>Filtros <code>category</code> / <code>price</code> y <code>limit</code> de página.</td>
+        </tr>
+        <tr>
+          <td>Criterio de paro</td>
+          <td>Condición de terminación: objetivo encontrado o espacio agotado.</td>
+          <td>Se agotan los documentos que cumplen el filtro (<code>query.stream()</code> termina).</td>
+        </tr>
+        <tr>
+          <td>Salida / resultado</td>
+          <td>Posición del elemento, un <code>true/false</code>, la solución… o “no encontrado”.</td>
+          <td>Lista de restaurantes (JSON en la API, tarjetas en la vista HTML).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="algo-note">En búsqueda en <strong>espacio de estados</strong> (inteligencia artificial) estos elementos se
+  formulan como: <strong>estado inicial</strong>, <strong>operadores</strong> (acciones y sucesores),
+  <strong>prueba de meta</strong>, <strong>función de costo</strong> y —si la búsqueda es informada— una
+  <strong>función heurística</strong> h(n).</p>
+</section>
+
+<!-- (c) Ejemplo -->
+<section class="algo-block">
+  <h2>3 · Ejemplo: búsqueda binaria (elementos identificados)</h2>
+  <p>Busca un dato en un vector <em>ordenado</em> dividiendo el espacio a la mitad en cada paso:
+  complejidad <strong>O(log n)</strong> — en un vector de 50 000 000 elementos hace como máximo
+  <strong>26 comparaciones</strong>.</p>
+  <pre class="algo-code"><code># Elementos: vec (espacio) · dato (objetivo) · inf/sup (controles)
+#            centro (índice) · == y < (comparación) · pos (salida)
+
+def busqueda_binaria(vec, dato):
+    inf, sup = 0, len(vec) - 1        # controles del espacio activo
+    while inf <= sup:                 # criterio de paro
+        centro = (inf + sup) // 2     # índice a examinar
+        if vec[centro] == dato:       # función de comparación
+            return centro             # salida: posición encontrada
+        if dato < vec[centro]:
+            sup = centro - 1          # descarta la mitad superior
+        else:
+            inf = centro + 1          # descarta la mitad inferior
+    return -1                         # salida: no encontrado</code></pre>
+  <p class="algo-note"><strong>Y esta app, ¿cómo busca?</strong> El panel “Buscar” de la portada ejecuta una
+  consulta a Firestore con filtro OR: <code>city == texto</code> <em>o</em> nombre por rango de prefijo
+  (<code>name >= texto</code> y <code>name <= texto + "\\uf8ff"</code>). Es una búsqueda
+  <strong>por comparación de claves</strong> donde los dropdowns acotan el espacio y el cursor pagina la salida
+  (ver <code>app/repositories/restaurant_repository.py</code>).</p>
+</section>
+
+<!-- (d) Clasificación -->
+<section class="algo-block">
+  <h2>4 · Clasificación de los algoritmos de búsqueda</h2>
+  <div class="algo-grid">
+    <article class="algo-card exh">
+      <h3>🔍 Exhaustiva</h3>
+      <p class="algo-aka">ciega · no informada · fuerza bruta</p>
+      <p>Explora el espacio sistemáticamente <strong>sin conocimiento adicional</strong> del problema.
+      Encuentra la solución si existe, pero puede ser costosa en espacios grandes.</p>
+      <p class="algo-ex">Secuencial O(n) · Binaria O(log n) · BFS · DFS · IDS · Dijkstra · backtracking · ramificación y poda</p>
+    </article>
+    <article class="algo-card heu">
+      <h3>🧠 Heurística</h3>
+      <p class="algo-aka">informada · guiada por conocimiento</p>
+      <p>Usa una <strong>función heurística h(n)</strong> que estima cuánto falta para el objetivo y
+      explora primero los caminos más prometedores. Rápida; el óptimo solo está garantizado con h admisible (A*).</p>
+      <p class="algo-ex">Voraz (greedy best-first) · A* · IDA* · GRASP</p>
+    </article>
+    <article class="algo-card loc">
+      <h3>⛰️ Local</h3>
+      <p class="algo-aka">trayectorial · mejora iterativa</p>
+      <p>Parte de <strong>una solución completa</strong> y la mejora moviéndose a soluciones
+      <strong>vecinas</strong>; solo importa el estado final. Riesgo: óptimos locales.</p>
+      <p class="algo-ex">Ascenso de colinas · Recocido simulado · Búsqueda tabú · VNS · ILS</p>
+    </article>
+    <article class="algo-card evo">
+      <h3>🧬 Evolutiva</h3>
+      <p class="algo-aka">poblacional · bioinspirada</p>
+      <p>Mantiene una <strong>población de soluciones</strong> que evoluciona con operadores de
+      <strong>selección, cruce y mutación</strong>. Explora muchos puntos a la vez, sin garantía de óptimo.</p>
+      <p class="algo-ex">Algoritmos genéticos · Evolución diferencial · EDA · PSO · Colonia de hormigas</p>
+    </article>
+  </div>
+
+  <h3 class="algo-sub">Criterios complementarios</h3>
+  <ul class="algo-chips">
+    <li><strong>Por garantía:</strong> exacta vs aproximada</li>
+    <li><strong>Por ubicación de los datos:</strong> interna (RAM) vs externa (disco/BD)</li>
+    <li><strong>Por operación:</strong> comparación de claves vs transformación de claves (hashing)</li>
+    <li><strong>Por nº de soluciones:</strong> trayectorial vs poblacional</li>
+    <li><strong>Por aleatoriedad:</strong> determinista vs estocástica</li>
+  </ul>
+</section>
+
+<!-- (e) Infografía -->
+<section class="algo-block">
+  <h2>5 · Infografía de la clasificación</h2>
+  <a href="/static/infografia/clasificacion-algoritmos-busqueda.html" target="_blank" rel="noopener">
+    <img class="algo-infografia" loading="lazy"
+         src="/static/infografia/clasificacion-algoritmos-busqueda.png"
+         alt="Infografía: clasificación de los algoritmos de búsqueda en cuatro familias (exhaustiva, heurística, local y evolutiva) más criterios complementarios">
+  </a>
+  <p class="algo-note">
+    <a href="/static/infografia/clasificacion-algoritmos-busqueda.html" target="_blank" rel="noopener">Abrir infografía interactiva ↗</a> ·
+    <a href="/static/infografia/clasificacion-algoritmos-busqueda.png" target="_blank" rel="noopener">Ver PNG a pantalla completa ↗</a>
+  </p>
+</section>
+
+<p class="algo-sources">
+  Fuentes: Wikipedia — «Algoritmo de búsqueda» · UNTREF, <em>Apuntes de Algoritmos y Programación</em> ·
+  Russell & Norvig, <em>Artificial Intelligence: A Modern Approach</em> ·
+  Springer, <em>Multi-Objective Optimization using Artificial Intelligence Techniques</em>.
+</p>
+{% endblock %}

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clasificación de los Algoritmos de Búsqueda</title>
+<style>
+  :root {
+    --paper: #f6f2ea;
+    --ink: #2b2320;
+    --muted: #6f6558;
+    --line: #d8cfc2;
+    --card: #fffdf9;
+    --exh: #2563eb;   --exh-bg: #eff4ff;
+    --heu: #d97706;   --heu-bg: #fdf4e7;
+    --loc: #059669;   --loc-bg: #ecfaf3;
+    --evo: #7c3aed;   --evo-bg: #f4f1fd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 44px 40px 36px;
+    width: 960px;
+  }
+
+  /* ---------- Encabezado ---------- */
+  .kicker {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  h1 {
+    text-align: center;
+    font-size: 31px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 8px 0 6px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto 28px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Raíz del árbol ---------- */
+  .root-wrap::after {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 30px;
+    background: var(--line);
+    margin: 0 auto;
+  }
+  .root {
+    background: var(--ink);
+    color: #f7f2ea;
+    border-radius: 14px;
+    padding: 18px 26px;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .root .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #d9c9a8;
+    border: 1px solid rgba(217, 201, 168, 0.5);
+    border-radius: 999px;
+    padding: 3px 12px;
+    margin-bottom: 8px;
+  }
+  .root h2 { font-size: 19px; font-weight: 800; margin-bottom: 6px; }
+  .root p { font-size: 12.5px; line-height: 1.55; color: #e8e0d2; }
+
+  /* ---------- Conectores del árbol ---------- */
+  .branches {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    position: relative;
+    padding-top: 32px;
+  }
+  .branches::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12.5%;
+    width: 75%;
+    height: 2px;
+    background: var(--line);
+  }
+  .branch { position: relative; }
+  .branch::before {
+    content: "";
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 32px;
+    background: var(--line);
+  }
+
+  /* ---------- Tarjetas de cada familia ---------- */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    height: 100%;
+  }
+  .card.exh { border-top: 4px solid var(--exh); }
+  .card.heu { border-top: 4px solid var(--heu); }
+  .card.loc { border-top: 4px solid var(--loc); }
+  .card.evo { border-top: 4px solid var(--evo); }
+
+  .card header { display: flex; align-items: center; gap: 8px; }
+  .card .icon {
+    font-size: 20px;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 9px;
+    flex-shrink: 0;
+  }
+  .exh .icon { background: var(--exh-bg); }
+  .heu .icon { background: var(--heu-bg); }
+  .loc .icon { background: var(--loc-bg); }
+  .evo .icon { background: var(--evo-bg); }
+
+  .card h3 { font-size: 14.5px; font-weight: 800; line-height: 1.15; }
+  .card .aka { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+  .exh h3, .exh .aka strong { color: var(--exh); }
+  .heu h3, .heu .aka strong { color: var(--heu); }
+  .loc h3, .loc .aka strong { color: var(--loc); }
+  .evo h3, .evo .aka strong { color: var(--evo); }
+
+  .card p.desc { font-size: 11.5px; line-height: 1.5; color: #4a4137; }
+
+  .label {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chips span {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid;
+    line-height: 1.3;
+  }
+  .exh .chips span { color: var(--exh); border-color: #bcd2f7; background: var(--exh-bg); }
+  .heu .chips span { color: var(--heu); border-color: #f2d5ab; background: var(--heu-bg); }
+  .loc .chips span { color: var(--loc); border-color: #abe3c8; background: var(--loc-bg); }
+  .evo .chips span { color: var(--evo); border-color: #d4c6f5; background: var(--evo-bg); }
+
+  .card footer {
+    margin-top: auto;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line);
+    line-height: 1.35;
+  }
+  .ok   { color: #047857; }
+  .warn { color: #b45309; }
+
+  /* ---------- Criterios complementarios ---------- */
+  .others {
+    margin-top: 34px;
+    background: var(--ink);
+    border-radius: 14px;
+    padding: 18px 22px 16px;
+  }
+  .others h4 {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: #d9c9a8;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .others-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .others-grid .o {
+    background: rgba(247, 242, 234, 0.06);
+    border: 1px solid rgba(217, 201, 168, 0.25);
+    border-radius: 9px;
+    padding: 9px 10px;
+  }
+  .o .q { font-size: 9.5px; font-weight: 700; letter-spacing: 1px; color: #d9c9a8; text-transform: uppercase; margin-bottom: 4px; }
+  .o .a { font-size: 11px; font-weight: 700; color: #f2ead9; line-height: 1.35; }
+
+  /* ---------- Pie ---------- */
+  .foot {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .foot strong { color: #4a4137; }
+
+  @media (max-width: 760px) {
+    body { width: auto; padding: 24px 16px; }
+    .branches { grid-template-columns: 1fr 1fr; }
+    .branches::before { display: none; }
+    .branch::before { display: none; }
+    .others-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <p class="kicker">Informática · Ciencias de la Computación</p>
+  <h1>Clasificación de los Algoritmos de Búsqueda</h1>
+  <p class="subtitle">Un algoritmo de búsqueda localiza un dato o una solución dentro de un espacio de búsqueda.
+  Según la estrategia que usa para explorar ese espacio, se organiza en cuatro grandes familias.</p>
+
+  <!-- RAÍZ -->
+  <div class="root-wrap">
+    <div class="root">
+      <span class="tag">Definición</span>
+      <h2>Algoritmo de búsqueda</h2>
+      <p>Procedimiento paso a paso que recorre un <strong>espacio de búsqueda</strong> —una colección de datos,
+      un árbol, un grafo o un espacio de estados— comparando los elementos visitados con el
+      <strong>objetivo</strong> hasta encontrarlo o agotar el espacio.</p>
+    </div>
+  </div>
+
+  <!-- 4 FAMILIAS -->
+  <div class="branches">
+
+    <div class="branch">
+      <div class="card exh">
+        <header>
+          <span class="icon">🔍</span>
+          <div>
+            <h3>Exhaustiva</h3>
+            <p class="aka">ciega · no informada · fuerza bruta</p>
+          </div>
+        </header>
+        <p class="desc">Explora el espacio de forma sistemática, <strong>sin conocimiento adicional</strong> del
+        problema. Recorre todos los casos necesarios hasta dar con el objetivo.</p>
+        <p class="label">Ejemplos</p>
+        <div class="chips">
+          <span>Secuencial / lineal · O(n)</span>
+          <span>Binaria · O(log n)†</span>
+          <span>Por saltos</span>
+          <span>Interpolación</span>
+          <span>BFS (anchura)</span>
+          <span>DFS (profundidad)</span>
+          <span>IDS</span>
+          <span>Costo uniforme (Dijkstra)</span>
+          <span>Backtracking</span>
+          <span>Ramificación y poda</span>
+        </div>
+        <footer><span class="ok">✔ Encuentra la solución si existe</span><br>† la binaria requiere datos ordenados</footer>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="card heu">
+        <header>
+          <span class="icon">🧠</span>
+          <div>
+            <h3>Heurística</h3>
+            <p class="aka">informada · guiada por conocimiento</p>
+          </div>
+        </header>
+        <p class="desc">Usa una <strong>función heurística h(n)</strong> que estima cuánto falta para llegar al
+        objetivo, y explora primero los caminos más prometedores.</p>
+        <p class="label">Ejemplos</p>
+        <div class="chips">
+          <span>Voraz (greedy best-first)</span>
+          <span>A*</span>
+          <span>IDA*</span>
+          <span>Colina con heurística</span>
+          <span>GRASP</span>
+        </div>
+        <footer><span class="warn">⚠ Rápida, pero el óptimo no está garantizado</span><br>A* sí lo garantiza con h admisible</footer>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="card loc">
+        <header>
+          <span class="icon">⛰️</span>
+          <div>
+            <h3>Local</h3>
+            <p class="aka">trayectorial · de mejora iterativa</p>
+          </div>
+        </header>
+        <p class="desc">Parte de <strong>una solución completa</strong> y la mejora paso a paso moviéndose a
+        soluciones <strong>vecinas</strong>; solo importa el estado final, no el camino.</p>
+        <p class="label">Ejemplos</p>
+        <div class="chips">
+          <span>Ascenso de colinas</span>
+          <span>Recocido simulado</span>
+          <span>Búsqueda tabú</span>
+          <span>Entorno variable (VNS)</span>
+          <span>Local iterada (ILS)</span>
+        </div>
+        <footer><span class="warn">⚠ Puede quedar atrapada en óptimos locales</span><br>el recocido simulado los evade</footer>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="card evo">
+        <header>
+          <span class="icon">🧬</span>
+          <div>
+            <h3>Evolutiva</h3>
+            <p class="aka">poblacional · bioinspirada</p>
+          </div>
+        </header>
+        <p class="desc">Mantiene una <strong>población de soluciones</strong> que evoluciona generación tras
+        generación con operadores: <strong>selección, cruce y mutación</strong>.</p>
+        <p class="label">Ejemplos</p>
+        <div class="chips">
+          <span>Algoritmos genéticos</span>
+          <span>Evolución diferencial</span>
+          <span>Estimación de distribuciones</span>
+          <span>PSO (enjambre)</span>
+          <span>Colonia de hormigas</span>
+        </div>
+        <footer><span class="warn">⚠ Sin garantía de óptimo</span><br>explora muchos puntos a la vez</footer>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CRITERIOS COMPLEMENTARIOS -->
+  <div class="others">
+    <h4>Otros criterios de clasificación</h4>
+    <div class="others-grid">
+      <div class="o">
+        <p class="q">Por garantía</p>
+        <p class="a">Exacta (óptimo asegurado) vs aproximada (buena solución, menos costo)</p>
+      </div>
+      <div class="o">
+        <p class="q">Por ubicación de los datos</p>
+        <p class="a">Interna (en RAM) vs externa (disco, bases de datos masivas)</p>
+      </div>
+      <div class="o">
+        <p class="q">Por principio de operación</p>
+        <p class="a">Comparación de claves (secuencial, binaria) vs transformación de claves (hashing)</p>
+      </div>
+      <div class="o">
+        <p class="q">Por nº de soluciones</p>
+        <p class="a">Trayectorial (una a la vez) vs poblacional (un conjunto)</p>
+      </div>
+      <div class="o">
+        <p class="q">Por aleatoriedad</p>
+        <p class="a">Determinista (mismo recorrido) vs estocástica (con azar)</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">
+    La elección del algoritmo depende del <strong>tamaño del espacio</strong>, la <strong>estructura de los datos</strong>
+    y de si se requiere <strong>garantía de optimalidad</strong>.<br>
+    Fuentes: Wikipedia — «Algoritmo de búsqueda» · UNTREF, Apuntes de Algoritmos y Programación · Russell & Norvig, <em>AIMA</em> · Springer, <em>Multi-Objective Optimization using AI Techniques</em>
+  </p>
+
+</body>
+</html>
