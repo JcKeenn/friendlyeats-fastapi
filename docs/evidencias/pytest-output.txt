@@ -3,20 +3,22 @@ platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\Jc\Docum
 cachedir: .pytest_cache
 rootdir: C:\Users\Jc\Documents\Optativa_Produto 2\friendlyeats-fastapi
 plugins: anyio-4.15.1
-collecting ... collected 13 items
+collecting ... collected 15 items
 
-tests/test_restaurants.py::test_health PASSED                            [  7%]
-tests/test_restaurants.py::test_create_restaurant PASSED                 [ 15%]
-tests/test_restaurants.py::test_invalid_price PASSED                     [ 23%]
-tests/test_restaurants.py::test_get_restaurant PASSED                    [ 30%]
-tests/test_restaurants.py::test_get_restaurant_not_found PASSED          [ 38%]
+tests/test_restaurants.py::test_health PASSED                            [  6%]
+tests/test_restaurants.py::test_algoritmos_page PASSED                   [ 13%]
+tests/test_restaurants.py::test_create_restaurant PASSED                 [ 20%]
+tests/test_restaurants.py::test_invalid_price PASSED                     [ 26%]
+tests/test_restaurants.py::test_get_restaurant PASSED                    [ 33%]
+tests/test_restaurants.py::test_get_restaurant_not_found PASSED          [ 40%]
 tests/test_restaurants.py::test_update_restaurant PASSED                 [ 46%]
 tests/test_restaurants.py::test_update_not_found PASSED                  [ 53%]
-tests/test_restaurants.py::test_delete_restaurant PASSED                 [ 61%]
-tests/test_restaurants.py::test_delete_not_found PASSED                  [ 69%]
-tests/test_restaurants.py::test_list_restaurants PASSED                  [ 76%]
-tests/test_restaurants.py::test_filters PASSED                           [ 84%]
-tests/test_restaurants.py::test_invalid_order_by PASSED                  [ 92%]
+tests/test_restaurants.py::test_delete_restaurant PASSED                 [ 60%]
+tests/test_restaurants.py::test_delete_not_found PASSED                  [ 66%]
+tests/test_restaurants.py::test_list_restaurants PASSED                  [ 73%]
+tests/test_restaurants.py::test_filters PASSED                           [ 80%]
+tests/test_restaurants.py::test_search PASSED                            [ 86%]
+tests/test_restaurants.py::test_invalid_order_by PASSED                  [ 93%]
 tests/test_restaurants.py::test_home_renders_html PASSED                 [100%]
 
 ============================== warnings summary ===============================
@@ -25,4 +27,4 @@ tests/test_restaurants.py::test_home_renders_html PASSED                 [100%]
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-======================== 13 passed, 1 warning in 1.84s ========================
+======================== 15 passed, 1 warning in 1.33s ========================

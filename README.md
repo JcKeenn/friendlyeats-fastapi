@@ -18,7 +18,7 @@ con vistas HTML.
 | Editar y eliminar restaurante | ✅ `/restaurants/{id}/edit` + botón Eliminar |
 | Filtrar por ciudad, categoría o precio | ✅ en la UI y en la API |
 | Ver datos persistidos en el emulador de Firestore | ✅ UI del emulador en http://127.0.0.1:4000 |
-| Pruebas básicas del CRUD | ✅ 13 pruebas, todas pasan |
+| Pruebas básicas del CRUD | ✅ 15 pruebas, todas pasan |
 
 ## 🧰 Requisitos previos
 
@@ -160,6 +160,12 @@ Vistas HTML (Jinja2)     Endpoints REST (FastAPI)
    no está corriendo, así `pytest -v` funciona solo.
 7. **`run.py` + `FriendlyEats.sln`**: para desarrollar y depurar con F5 en
    Visual Studio 2026 (Python workload instalada).
+8. **Búsqueda "Buscar" con OR de Firestore**: `search` busca por prefijo de
+   nombre (`name >= q` y `name <= q + \uf8ff`) **o** ciudad exacta con
+   `OrFilter`; con búsqueda activa se ordena por `name` para usar índices
+   simples. El dropdown de Categoría se llena con las categorías reales de la
+   colección (`distinct_categories`). El panel (Buscar/Categoría/Precio +
+   Limpiar) aplica los filtros al cambiar de opción o al pulsar Enter.
 
 ## 📦 Entregables del Sprint 1 y cómo verificarlos
 
@@ -169,7 +175,7 @@ Vistas HTML (Jinja2)     Endpoints REST (FastAPI)
 | Firestore conectado al emulador | `firebase emulators:start --only firestore`; la app lista/crea documentos |
 | CRUD completo de restaurantes | Crear en `/restaurants/new`, ver detalle, editar y eliminar desde la UI (o probar en http://localhost:8000/docs) |
 | Vistas HTML para listar, crear, ver, editar y eliminar | Navegar `/`, `/restaurants/new`, `/restaurants/{id}`, `/restaurants/{id}/edit` |
-| Filtros básicos por ciudad, categoría y precio | Formulario "Filtrar" de la página principal o `GET /api/v1/restaurants?city=Puebla&price=2` |
+| Filtros básicos por ciudad, categoría y precio | Panel de búsqueda de la portada (Buscar por nombre o ciudad + Categoría + Precio + Limpiar) o `GET /api/v1/restaurants?search=Puebla&price=2` |
 | Datos semilla cargados | `python -m scripts.seed` → aparecen 10 restaurantes |
 | Pruebas básicas del CRUD | `pytest -v` → 15 passed |
 | README con instrucciones | Este archivo |

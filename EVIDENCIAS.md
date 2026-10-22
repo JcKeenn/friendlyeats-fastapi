@@ -21,7 +21,7 @@ verificarlo en vivo. Las capturas están en `docs/evidencias/`.
 | 12 | CSS responsive (S1-21) | `static/css/styles.css` + media query móvil | abrir en móvil / DevTools |
 | 13 | JS del formulario (S1-22) | `static/js/app.js` (crea/edita/elimina + errores) | crear/editar/eliminar desde la UI |
 | 14 | Datos semilla (S1-23) | `docs/evidencias/seed-output.txt` (10 restaurantes) + `06-emulador-firestore.png` | `python -m scripts.seed` |
-| 15 | Pruebas del CRUD (S1-24) | `docs/evidencias/pytest-output.txt` → **13 passed** | `pytest -v` |
+| 15 | Pruebas del CRUD (S1-24) | `docs/evidencias/pytest-output.txt` → **15 passed** | `pytest -v` |
 | 16 | README (S1-25) | `README.md` (comandos, arquitectura, decisiones) | — |
 | 17 | Persistencia en el emulador | `06-emulador-firestore.png` (colección `restaurants` con documentos) + `firestore-rest-documentos.txt` | http://127.0.0.1:4000/firestore/default/data/restaurants |
 
@@ -42,7 +42,7 @@ uvicorn app.main:app --reload              # terminal 2
 
 python -m scripts.seed                 # datos semilla (10 restaurantes)
 python -m scripts.demo_crud            # demostración del CRUD por HTTP
-pytest -v                              # 13 pruebas
+pytest -v                              # 15 pruebas
 ```
 
 ## Capturas incluidas (`docs/evidencias/`)
@@ -56,11 +56,11 @@ pytest -v                              # 13 pruebas
 | `05-filtros.png` | Filtro aplicado: `city=Puebla`, `price=2`, orden por calificación |
 | `06-emulador-firestore.png` | UI del Emulator Suite: colección `restaurants` con sus documentos |
 | `crud-output.txt` | Salida real del CRUD por HTTP (201/200/204/404/422) |
-| `pytest-output.txt` | Salida real de `pytest -v` (13 passed) |
+| `pytest-output.txt` | Salida real de `pytest -v` (15 passed) |
 | `seed-output.txt` | Salida real de la carga de datos semilla |
 | `firestore-rest-documentos.json` | Documentos crudos servidos por el emulador (prueba REST de persistencia) |
 
 > Fecha de generación: 21 de octubre de 2026. Todas las salidas fueron
 > producidas ejecutando el proyecto incluido en este paquete.
-> Re-verificado el 22 de octubre de 2026: `pytest -v` → **13 passed**
+> Re-verificado el 22 de octubre de 2026: `pytest -v` → **15 passed**
 > (emulador auto-arrancado por `tests/conftest.py`).
