@@ -25,6 +25,15 @@ verificarlo en vivo. Las capturas están en `docs/evidencias/`.
 | 16 | README (S1-25) | `README.md` (comandos, arquitectura, decisiones) | — |
 | 17 | Persistencia en el emulador | `06-emulador-firestore.png` (colección `restaurants` con documentos) + `firestore-rest-documentos.txt` | http://127.0.0.1:4000/firestore/default/data/restaurants |
 
+## Repositorio (S1-01)
+
+- **Tipo:** Git **local** en la raíz del proyecto (`friendlyeats-fastapi/.git`),
+  creado con `git init`. **No tiene remote configurado** (no está publicado en
+  GitHub/GitLab/Bitbucket).
+- **Rama:** `main` · **Commits:** 2 (`feat: Sprint 1 …`, `docs: evidencias …`).
+- **Autor:** Daix \<daix@users.noreply.github.com\> · 2026-10-21.
+- Verificación: `git log --oneline`, `git remote -v` (vacío = sin remote).
+
 ## Cómo regenerar las evidencias
 
 ```bash
@@ -53,3 +62,5 @@ pytest -v                              # 13 pruebas
 
 > Fecha de generación: 21 de octubre de 2026. Todas las salidas fueron
 > producidas ejecutando el proyecto incluido en este paquete.
+> Re-verificado el 22 de octubre de 2026: `pytest -v` → **13 passed**
+> (emulador auto-arrancado por `tests/conftest.py`).
