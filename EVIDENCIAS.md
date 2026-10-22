@@ -27,12 +27,14 @@ verificarlo en vivo. Las capturas están en `docs/evidencias/`.
 
 ## Repositorio (S1-01)
 
-- **Tipo:** Git **local** en la raíz del proyecto (`friendlyeats-fastapi/.git`),
-  creado con `git init`. **No tiene remote configurado** (no está publicado en
-  GitHub/GitLab/Bitbucket).
-- **Rama:** `main` · **Commits:** 2 (`feat: Sprint 1 …`, `docs: evidencias …`).
-- **Autor:** Daix \<daix@users.noreply.github.com\> · 2026-10-21.
-- Verificación: `git log --oneline`, `git remote -v` (vacío = sin remote).
+- **Tipo:** Git en la raíz del proyecto (`friendlyeats-fastapi/.git`), creado con
+  `git init` y **publicado en GitHub**:
+  **https://github.com/JcKeenn/friendlyeats-fastapi** (privado, cuenta JcKeenn).
+- **Rama:** `main` · remote `origin` configurado · historial completo en el push.
+- **Autor:** Daix \<daix@users.noreply.github.com\> · octubre de 2026.
+- Verificación: `git remote -v`, `git log origin/main --oneline`.
+- Ninguna credencial queda en Git: `.gitignore` excluye `.env`, `secrets/` y los
+  JSON de cuentas de servicio.
 
 ## Cómo regenerar las evidencias
 
